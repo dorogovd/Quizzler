@@ -34,11 +34,19 @@ struct QuizBrain {
         }
     }
     
-    func getQuestionText(_ questionNumber: Int) -> String {
+    func getQuestionText() -> String {
         return quiz[questionNumber].text
     }
     
-    func getProgress(_ questionNumber: Int) -> Float {
+    func getProgress() -> Float {
         return Float(questionNumber) / Float(quiz.count)
+    }
+    
+    mutating func nextQuestion() {
+        if questionNumber != quiz.endIndex-1 {
+            questionNumber += 1
+        } else {
+            questionNumber = 0
+        }
     }
 }

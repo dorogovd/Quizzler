@@ -34,16 +34,12 @@ class ViewController: UIViewController {
         } else {
             sender.backgroundColor = UIColor.red
         }
-        if quizBrain.questionNumber != quizBrain.quiz.endIndex-1 {
-            quizBrain.questionNumber += 1
-        } else {
-            quizBrain.questionNumber = 0
-        }
+        quizBrain.nextQuestion()
     }
     
     @objc func updateUI() {
-        questionLabel.text = quizBrain.getQuestionText(quizBrain.questionNumber)
-        progressBar.setProgress(quizBrain.getProgress(quizBrain.questionNumber), animated: true)
+        questionLabel.text = quizBrain.getQuestionText()
+        progressBar.setProgress(quizBrain.getProgress(), animated: true)
         
         falseButton.backgroundColor = UIColor.clear
         trueButton.backgroundColor = UIColor.clear
