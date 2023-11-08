@@ -25,11 +25,11 @@ class ViewController: UIViewController {
     @IBAction func answerButtonTapped(_ sender: UIButton) {
         
         let userAnswer = sender.currentTitle // True, False
-        quizBrain.checkAnswer(userAnswer!)
+        let userGotItRight = quizBrain.checkAnswer(userAnswer!)
         
         Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(updateUI), userInfo: nil, repeats: false)
         
-        if quizBrain.checkAnswer(userAnswer!) {
+        if userGotItRight {
             sender.backgroundColor = UIColor.green
         } else {
             sender.backgroundColor = UIColor.red
@@ -42,11 +42,11 @@ class ViewController: UIViewController {
     }
     
     @objc func updateUI() {
-        questionLabel.text = quizBrain.quiz[quizBrain.questionNumber].text
+        questionLabel.text = quizBrain.getQuestionText(quizBrain.questionNumber)
+        progressBar.setProgress(quizBrain.getProgress(quizBrain.questionNumber), animated: true)
+        
         falseButton.backgroundColor = UIColor.clear
         trueButton.backgroundColor = UIColor.clear
-        progressBar.setProgress(Float(quizBrain.questionNumber + 1) / Float(quizBrain.quiz.count), animated: true)
-        //   progressBar.progress = Float(questionNumber + 1) / Float(quiz.count) - Angela's solution
     }
 }
 
