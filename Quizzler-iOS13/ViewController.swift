@@ -37,12 +37,11 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.progressBar.progress = 0.0
         updateUI()
     }
     
     @IBAction func answerButtonTapped(_ sender: UIButton) {
-
+        
         let userAnswer = sender.currentTitle // True, False
         let actualAnswer = quiz[questionNumber].answer
         
@@ -56,10 +55,8 @@ class ViewController: UIViewController {
         }
         if questionNumber != quiz.endIndex-1 {
             questionNumber += 1
-            progressBar.setProgress(Float(questionNumber) / Float(quiz.endIndex-1), animated: true)
         } else {
             questionNumber = 0
-            self.progressBar.progress = 0.0
         }
     }
     
@@ -67,8 +64,10 @@ class ViewController: UIViewController {
         questionLabel.text = quiz[questionNumber].text
         falseButton.backgroundColor = UIColor.clear
         trueButton.backgroundColor = UIColor.clear
+        progressBar.setProgress(Float(questionNumber + 1) / Float(quiz.count), animated: true)
+        //   progressBar.progress = Float(questionNumber + 1) / Float(quiz.count) - Angela's solution
     }
-    }
+}
 
 
 
